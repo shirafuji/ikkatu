@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>ikkatu</title>
+  </head>
+  <body>
+    <!-- Render the current template here -->
+    <h1>
+      ikkatu
+    </h1>
+    <div>
+      <form action="/search" method="get">
+        <div>
+            <input type="text" name="word" placeholder="食べログ ぐるなび 一休 で検索">
+        </div>
+        <div>
+            <input type="submit"value="検索">
+        </div>
+      </form>
+    </div>
+    <div class="tabelog">
+      <h3>
+        食べログ
+      </h3>
+      <div class="tabelog-result"></div>
+    </div>
+    <div class="google">
+      <h3>
+        Google
+      </h3>
+      <div class="google-result"></div>
+    </div>
+    <div class="ikkyu">
+      <h3>
+        一休
+      </h3>
+      <div class="ikkyu-result"></div>
+    </div>
+  </body>
+</html>

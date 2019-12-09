@@ -1,10 +1,14 @@
 package web
 
 import (
-	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello world")
+	t := template.Must(template.ParseFiles("templates/home.html"))
+	if err := t.Execute(w, nil); err != nil {
+		log.Fatal(err)
+	}
 }
