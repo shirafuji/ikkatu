@@ -17,9 +17,13 @@
       <div class="search-form" style="text-align: center; padding: 10px;">
         <form action="/search" method="get">
           <div class="input" style="padding: 5px 0px;">
-              <input type="text" name="word" class="search-field" placeholder="食べログ, Google, 一休 で検索"
-              style="width: 20%; height: 35px; border-radius: 5px; font-size: 11pt; box-shadow: 3px 3px 8px #666666; text-align: center; color: rgba(0, 0, 0, 0.74)">
-              <input type="submit" value="検索" style="display: inline-block; border-radius: 13%; font-size: 11pt; text-align: center; cursor: pointer; padding: 12px 12px; background: #ffffff;color: #000000; line-height: 1em; transition: .3s; box-shadow: 3px 3px 8px #666666; color: rgba(0, 0, 0, 0.74)">
+              <input type="text" name="area" class="search-field" placeholder="エリア  [例:銀座,渋谷]"
+              style="width: 20%; height: 40px; border-radius: 5px; font-size: 12pt; text-align: center; color: rgba(0, 0, 0, 0.74);
+              -webkit-appearance: none; border-style: inherit; border: 1px solid rgb(218, 214, 214)">
+              <input type="text" name="genre" class="search-field" placeholder="キーワード  [例:寿司,ラーメン]"
+              style="width: 20%; height: 40px; border-radius: 5px; font-size: 12pt; text-align: center; color: rgba(0, 0, 0, 0.74);
+              -webkit-appearance: none; border-style: inherit; border: 1px solid rgb(218, 214, 214)">
+              <input type="submit" value="検索" style="display: inline-block; border-radius: 5px; font-size: 12pt; text-align: center; cursor: pointer; padding: 13px 13px; background: #ffffff ;color: #000000; line-height: 1em; transition: .3s; color: rgba(0, 0, 0, 0.74)">
           </div>
         </form>
       </div>
@@ -34,42 +38,31 @@
       </form>
     </div> -->
     <div class="main" style="text-align: center;">
-      <div class="tabelog" style="width: 27%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+      <div class="tabelog" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
           食べログ
         </div>
         <div class="tabelog-result">
           <ul style="list-style: none; padding: 0px;">
-            <li style="padding-bottom: 10px;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
-              <div class="rst-name" style="font-weight: bold; font-size: 17px;">
-                蒙古タンメン中本
-              </div>
-              <div class="rst-review">
-                3.8 / 5 (50件)
-              </div>
-              <div class="rst-info">
-                <div class="rst-review">
-                  渋谷駅 579m / ラーメン、つけ麺
-                </div>
-               </div>
-            </li>
-            <li>
-              <div class="rst-name" style="font-weight: bold; font-size: 17px;">
-                  蒙古タンメン中本
-              </div>
-              <div class="rst-review">
-                3.8/5(50件)
-              </div>
-              <div class="rst-info">
-                <div class="rst-review">
-                  渋谷駅 579m / ラーメン、つけ麺
-                </div>
-              </div>
-            </li>
+            {{ range .Result}}
+              <li style="padding-bottom: 20px;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+                <a href={{.Url}} target="_blank" style="text-decoration: none; color: black;">
+                  <div class="rst-name" style="font-weight: bold; font-size: 17px;">
+                    {{ .Name }}
+                  </div>
+                  <div class="rst-review">
+                    {{ .Rating }}
+                  </div>
+                  <div class="rst-budget" style="font-size: 10px;">
+                    {{ .Budget }}
+                  </div>
+                </a>
+              </li>
+            {{ end }}
           </ul>
         </div>
       </div>
-      <div class="google" style="width: 27%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+      <div class="google" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
           Google
         </div>
@@ -84,7 +77,7 @@
           </ul>
         </div>
       </div>
-      <div class="ikkyu" style="width: 27%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+      <div class="ikkyu" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
           一休
         </div>
