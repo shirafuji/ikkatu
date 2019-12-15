@@ -24,6 +24,7 @@ type TabelogResult struct {
 		Url    string `json:"url"`
 		Rating string `json:"rating"`
 		Budget string `json:"budget"`
+		Info   string `json:"info"`
 	} `json:"result"`
 }
 
