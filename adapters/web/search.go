@@ -8,13 +8,24 @@ import (
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	tabelogResp := engine.SearchTabelog(&engine.TabelogRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
+	tabelogChan := make(chan *engine.TabelogResponse)
+	ikkyuChan := make(chan *engine.IkkyuResponse)
+	go func() {
+		tabelogResp := engine.SearchTabelog(&engine.TabelogRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
+		tabelogChan <- tabelogResp
+	}()
+	go func() {
+		ikkyuResp := engine.SearchIkkyu(&engine.IkkyuRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
+		ikkyuChan <- ikkyuResp
+	}()
+	tabelogResp := <-tabelogChan
+	ikkyuResp := <-ikkyuChan
+
 	if tabelogResp.Error != nil {
 		http.Error(w, tabelogResp.Error.Message, tabelogResp.Error.Code)
 		return
 	}
 	tabelogResult := tabelogResp.Result
-	ikkyuResp := engine.SearchIkkyu(&engine.IkkyuRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
 	if ikkyuResp.Error != nil {
 		http.Error(w, ikkyuResp.Error.Message, ikkyuResp.Error.Code)
 		return
