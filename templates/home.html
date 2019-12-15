@@ -44,7 +44,7 @@
         </div>
         <div class="tabelog-result">
           <ul style="list-style: none; padding: 0px;">
-            {{ range .Result}}
+            {{ range .Tabelog.Result }}
               <li style="padding-bottom: 20px;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
                 <a href={{.Url}} target="_blank" style="text-decoration: none; color: black;">
                   <div class="rst-name" style="font-weight: bold; font-size: 17px;">
@@ -56,24 +56,39 @@
                   <div class="rst-budget" style="font-size: 10px;">
                     {{ .Budget }}
                   </div>
+                  <div class="rst-info" style="font-size: 10px;">
+                    {{ .Info }}
+                  </div>
                 </a>
               </li>
             {{ end }}
           </ul>
         </div>
       </div>
-      <div class="google" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+      <div class="tabelog" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
-          Google
+          一休
         </div>
-        <div class="google-result">
+        <div class="ikkyu-result">
           <ul style="list-style: none; padding: 0px;">
-            <li>
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            </li>
-            <li>
-              bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-            </li>
+            {{ range .Ikkyu.Result}}
+              <li style="padding-bottom: 20px;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+                <a href={{.Url}} target="_blank" style="text-decoration: none; color: black;">
+                  <div class="rst-name" style="font-weight: bold; font-size: 17px;">
+                    {{ .Name }}
+                  </div>
+                  <div class="rst-review">
+                    {{ .Rating }}
+                  </div>
+                  <div class="rst-budget" style="font-size: 10px;">
+                    {{ .Budget }}
+                  </div>
+                  <div class="rst-info" style="font-size: 10px;">
+                    {{ .Info }}
+                  </div>
+                </a>
+              </li>
+            {{ end }}
           </ul>
         </div>
       </div>

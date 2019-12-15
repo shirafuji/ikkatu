@@ -8,17 +8,17 @@ import (
 	"github.com/shirafuji/ikkatu/domain"
 )
 
-type TabelogResponse struct {
-	Result *TabelogResult
+type IkkyuResponse struct {
+	Result *IkkyuResult
 	Error  *domain.Error
 }
 
-type TabelogRequest struct {
+type IkkyuRequest struct {
 	Area  string
 	Genre string
 }
 
-type TabelogResult struct {
+type IkkyuResult struct {
 	Result []struct {
 		Name   string `json:"name"`
 		Url    string `json:"url"`
@@ -28,29 +28,29 @@ type TabelogResult struct {
 	} `json:"result"`
 }
 
-func SearchTabelog(req *TabelogRequest) *TabelogResponse {
+func SearchIkkyu(req *IkkyuRequest) *IkkyuResponse {
 	values := url.Values{}
 	values.Add("area", req.Area)
 	values.Add("genre", req.Genre)
-	resp, err := http.Get(domain.APIURL + "/tabelog" + "?" + values.Encode())
+	resp, err := http.Get(domain.APIURL + "/ikkyu" + "?" + values.Encode())
 	if err != nil {
-		return &TabelogResponse{
+		return &IkkyuResponse{
 			Error: &domain.Error{
 				Code:    500,
 				Message: err.Error(),
 			},
 		}
 	}
-	data := &TabelogResult{}
+	data := &IkkyuResult{}
 	if err := json.NewDecoder(resp.Body).Decode(data); err != nil {
-		return &TabelogResponse{
+		return &IkkyuResponse{
 			Error: &domain.Error{
 				Code:    400,
 				Message: err.Error(),
 			},
 		}
 	}
-	return &TabelogResponse{
+	return &IkkyuResponse{
 		Result: data,
 	}
 }

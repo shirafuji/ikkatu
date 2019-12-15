@@ -8,14 +8,27 @@ import (
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	resp := engine.SearchTabelog(&engine.TabelogRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
-	if resp.Error != nil {
-		http.Error(w, resp.Error.Message, resp.Error.Code)
+	tabelogResp := engine.SearchTabelog(&engine.TabelogRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
+	if tabelogResp.Error != nil {
+		http.Error(w, tabelogResp.Error.Message, tabelogResp.Error.Code)
 		return
 	}
-	tabelogResult := resp.Result
+	tabelogResult := tabelogResp.Result
+	ikkyuResp := engine.SearchIkkyu(&engine.IkkyuRequest{Area: r.URL.Query().Get("area"), Genre: r.URL.Query().Get("genre")})
+	if ikkyuResp.Error != nil {
+		http.Error(w, ikkyuResp.Error.Message, ikkyuResp.Error.Code)
+		return
+	}
+	ikkyuResult := ikkyuResp.Result
+	Results := struct {
+		Tabelog *engine.TabelogResult
+		Ikkyu   *engine.IkkyuResult
+	}{
+		Tabelog: tabelogResult,
+		Ikkyu:   ikkyuResult,
+	}
 	t := template.Must(template.ParseFiles("templates/home.html"))
-	if err := t.Execute(w, tabelogResult); err != nil {
+	if err := t.Execute(w, Results); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
