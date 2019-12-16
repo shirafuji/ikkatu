@@ -7,14 +7,16 @@
   <body>
     <!-- Render the current template here -->
     <div class="header" style="text-align: center; width:100%; background-color:rgb(255, 166, 0); color: white; padding: 30px 0px; margin-bottom: 30px;">
-      <h1 style="font-size: 80px; font-weight: bold; line-height: 0%; color: white; margin:40px;">
-        ikkatu
+      <h1 style="font-size: 80px; font-weight: bold; line-height: 0%; margin:40px;">
+        <a href="/" style="text-decoration: none; color: white;">
+            ikkatu
+        </a>
       </h1>
-      <p style="color: rgba(0, 0, 0, 0.575); color: white; margin: 10px;">一括検索で比較を簡単に</p>
-      <p style="padding-top: 10px;">ikkatuは複数サイトでの検索結果を同時に表示することで比較を容易にするサービスです。<br>
+      <p style="color: rgba(0, 0, 0, 0.575); color: white; margin: 10px;">レストランランキング一括検索で比較を簡単に</p>
+      <p style="padding-top: 10px; font-size: 17px;">ikkatuは複数サイトでのレストラン検索結果を同時に表示することで比較を容易にするサービスです。<br>
       検索ワードを入力して検索ボタンを押してください！
     　</p>
-      <div class="search-form" style="text-align: center; padding: 10px;">
+      <div class="search-form" style="text-align: center; padding: 10px 0 15px 0;">
         <form action="/search" method="get">
           <div class="input" style="padding: 5px 0px;">
               <input type="text" name="area" class="search-field" placeholder="エリア  [例:銀座,渋谷]"
@@ -27,20 +29,14 @@
           </div>
         </form>
       </div>
+      <div class="message" style="font-size:13px; line-height: 0.2em; opacity: 0.9;"><p>検索には少々時間がかかります。</p><p>Yahooダイニングの検索がうまくいかなかった場合もう一度検索してください。</p></div>
     </div>
-    <!-- <div class="search-form" style="text-align: center; padding: 30px;">
-      <form action="/search" method="get">
-        <div class="input" style="padding: 30px 0px;">
-            <input type="text" name="word" class="search-field" placeholder="食べログ, Google, 一休 で検索"
-            style="width: 20%; height: 35px; border-radius: 5px; font-size: 11pt; box-shadow: 3px 3px 8px #666666; text-align: center; color: rgba(0, 0, 0, 0.74)">
-            <input type="submit" value="検索" style="display: inline-block; border-radius: 13%; font-size: 11pt; text-align: center; cursor: pointer; padding: 12px 12px; background: #ffffff;color: #000000; line-height: 1em; opacity: 0.9; transition: .3s; box-shadow: 3px 3px 8px #666666; color: rgba(0, 0, 0, 0.74)">
-        </div>
-      </form>
-    </div> -->
     <div class="main" style="text-align: center;">
       <div class="tabelog" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
-          食べログ
+          <a href="https://tabelog.com/" target="_blank" style="text-decoration: none; color: black;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+            食べログ
+          </a>
         </div>
         <div class="tabelog-result">
           <ul style="list-style: none; padding: 0px;">
@@ -65,9 +61,40 @@
           </ul>
         </div>
       </div>
-      <div class="tabelog" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+      <div class="yahoo" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
         <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
-          一休
+          <a href="https://reservation.yahoo.co.jp/restaurant/" target="_blank" style="text-decoration: none; color: black;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+              Yahoo ダイニング
+          </a>
+        </div>
+        <div class="yahoo-result">
+          <ul style="list-style: none; padding: 0px;">
+            {{ range .Yahoo.Result }}
+              <li style="padding-bottom: 20px;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+                <a href={{.Url}} target="_blank" style="text-decoration: none; color: black;">
+                  <div class="rst-name" style="font-weight: bold; font-size: 17px;">
+                    {{ .Name }}
+                  </div>
+                  <div class="rst-review">
+                    {{ .Rating }}
+                  </div>
+                  <div class="rst-budget" style="font-size: 10px;">
+                    {{ .Budget }}
+                  </div>
+                  <div class="rst-info" style="font-size: 10px;">
+                    {{ .Info }}
+                  </div>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      <div class="一休" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
+        <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
+            <a href="https://restaurant.ikyu.com/" target="_blank" style="text-decoration: none; color: black;" onMouseOver="this.style.opacity='0.4'" onMouseOut="this.style.opacity='1'">
+              一休
+            </a>
         </div>
         <div class="ikkyu-result">
           <ul style="list-style: none; padding: 0px;">
@@ -89,21 +116,6 @@
                 </a>
               </li>
             {{ end }}
-          </ul>
-        </div>
-      </div>
-      <div class="ikkyu" style="width: 25%; display: inline-block; vertical-align: top; word-wrap: break-word; text-align: left; margin: 10px 30px 0 0;">
-        <div style="border-bottom: 1px solid rgb(218, 214, 214); font-size: 25px; font-weight: bold;">
-          一休
-        </div>
-        <div class="ikkyu-result">
-          <ul style="list-style: none; padding: 0px;">
-            <li>
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            </li>
-            <li>
-              bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-            </li>
           </ul>
         </div>
       </div>
