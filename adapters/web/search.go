@@ -46,10 +46,14 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		Tabelog *engine.TabelogResult
 		Ikkyu   *engine.IkkyuResult
 		Yahoo   *engine.YahooResult
+		Area    string
+		Genre   string
 	}{
 		Tabelog: tabelogResult,
 		Ikkyu:   ikkyuResult,
 		Yahoo:   yahooResult,
+		Area:    r.URL.Query().Get("area"),
+		Genre:   r.URL.Query().Get("genre"),
 	}
 	t := template.Must(template.ParseFiles("templates/home.html"))
 	if err := t.Execute(w, Results); err != nil {

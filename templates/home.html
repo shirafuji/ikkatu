@@ -19,10 +19,10 @@
       <div class="search-form" style="text-align: center; padding: 10px 0 15px 0;">
         <form action="/search" method="get">
           <div class="input" style="padding: 5px 0px;">
-              <input type="text" name="area" class="search-field" placeholder="エリア  [例:銀座,渋谷]"
+              <input type="text" name="area" class="search-field" placeholder="エリア  [例:銀座,渋谷]" value="{{.Area}}"
               style="width: 20%; height: 40px; border-radius: 5px; font-size: 12pt; text-align: center; color: rgba(0, 0, 0, 0.74);
               -webkit-appearance: none; border-style: inherit; border: 1px solid rgb(218, 214, 214)">
-              <input type="text" name="genre" class="search-field" placeholder="キーワード  [例:寿司,イタリアン]"
+              <input type="text" name="genre" class="search-field" placeholder="キーワード  [例:寿司,イタリアン]" value="{{.Genre}}"
               style="width: 20%; height: 40px; border-radius: 5px; font-size: 12pt; text-align: center; color: rgba(0, 0, 0, 0.74);
               -webkit-appearance: none; border-style: inherit; border: 1px solid rgb(218, 214, 214)">
               <input type="submit" value="検索" style="display: inline-block; border-radius: 5px; font-size: 12pt; text-align: center; cursor: pointer; padding: 13px 13px; background: #ffffff ;color: #000000; line-height: 1em; transition: .3s; color: rgba(0, 0, 0, 0.74)">
